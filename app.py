@@ -39,10 +39,6 @@ for i in range(0,25):
 		val = (i%12)
 	hour_mapping[i] = str(val) + part
 
-@app.errorhandler(404)
-def not_found(e):
-    return app.send_static_file('index.html')
-
 
 @app.route('/')
 def index():
@@ -51,7 +47,6 @@ def index():
 @app.route('/time')
 def get_current_time():
 	return {'time': time.time()}
-
 
 
 @app.route('/getCustomerCount')
@@ -216,5 +211,6 @@ def get_dist_tts():
 		result[j] = z
 	return result
 
+port = int(os.environ.get('PORT', 3307))
 if __name__ == "__main__":
-    app.run(debug=True, host="localhost", port=5000)
+    app.run(debug=False, host="0.0.0.0", port=port)
