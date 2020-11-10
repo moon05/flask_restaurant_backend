@@ -1,6 +1,7 @@
 import time
 from flask import Flask
 from flask import jsonify
+from flask_cors import CORS
 import os
 import sys
 import glob
@@ -12,6 +13,7 @@ pp = pprint.PrettyPrinter()
 
 
 app = Flask(__name__)
+CORS(app)
 
 
 fields = ["customer_number", "day_part", "first_seen_utc", "model_id", "tts"]
