@@ -11,13 +11,11 @@ from datetime import datetime
 pp = pprint.PrettyPrinter()
 
 
-app = Flask(__name__, static_url_path='')
+app = Flask(__name__)
 
 
 fields = ["customer_number", "day_part", "first_seen_utc", "model_id", "tts"]
-cwd = os.getcwd()
-print(cwd)
-df = pd.read_csv('./api/data_aug27.csv', usecols=fields, encoding='utf-8')
+df = pd.read_csv('./data_aug27.csv', usecols=fields, encoding='utf-8')
 df.rename(columns={"first_seen_utc": "date"}, inplace=True)
 
 START_DATE_OBJ = datetime.fromtimestamp(df.date.iloc[0])
@@ -48,7 +46,7 @@ def not_found(e):
 
 @app.route('/')
 def index():
-    return app.send_static_file('index.html')
+    return "<h1> Hello! You have reached the api for Restaurant Viz! </h1>"
 
 @app.route('/time')
 def get_current_time():
